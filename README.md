@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## About this Project
 
 This porject allows users to add kegs to a list where they can then view the details of each created keg, as well as buy a pint from each one.
 
