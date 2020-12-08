@@ -22,7 +22,7 @@ class KegController extends React.Component {
       this.setState({
         formVisibleOnPage: false,
         kegDetailsVisible: false,
-        selectedKeg: null    
+        selectedKeg: null
       });
     } else {
       this.setState(prevState => ({
@@ -32,34 +32,28 @@ class KegController extends React.Component {
   }
 
   handleChangingSelectedKeg = (id) => { // view Keg in Detail
-    // console.log(`id: ${id}`);
     const selectedKeg = this.state.onTap.filter((keg) => {
-      // console.log(`keg: ${JSON.stringify(keg)}`);
       return keg.id === id;
     })[0];
-    // console.log(`selectedKeg: ${JSON.stringify(selectedKeg)}`);
-    this.setState({ selectedKeg: selectedKeg, kegDetailsVisible: true });    
+    this.setState({ selectedKeg: selectedKeg, kegDetailsVisible: true });
   }
 
   handleAddingNewKegToList = (newKeg) => { // adds new Keg to Array
-    // console.log(`newKeg: ${JSON.stringify(newKeg)}`);
-
     const newOnTap = this.state.onTap
       .concat(newKeg);
     this.setState({
       onTap: newOnTap,
-      formVisibleOnPage: false,      
+      formVisibleOnPage: false,
       totalPintsLeft: this.state.totalPintsLeft + 124
     });
   }
 
   handleBuyingPintsClick = (id) => {
     const selectedKeg = this.state.onTap.filter((keg) => {
-      // console.log(`keg: ${JSON.stringify(keg)}`);
       return keg.id === id;
     })[0];
-    selectedKeg.pintsLeft = selectedKeg.pintsLeft > 0 ?  selectedKeg.pintsLeft - 1 : 0;
-  
+    selectedKeg.pintsLeft = selectedKeg.pintsLeft > 0 ? selectedKeg.pintsLeft - 1 : 0;
+
     let newPintsLeft = this.state.totalPintsLeft > 0 ? this.state.totalPintsLeft - 1 : 0;
 
     this.setState({
@@ -71,13 +65,8 @@ class KegController extends React.Component {
     let currentlyVisibleComponent = null;
     let buttonText = null;
 
-    // if (this.state.editing) { // edit
-    //   currentlyVisibleState = <EditItemForm
-    //   item = {this.state.selectedItem}
-    // onEditItem =  {this.handleEditingItemInList}/>
-
-    if (this.state.formVisibleOnPage) { // catch is set
-      currentlyVisibleComponent = <NewKegForm 
+    if (this.state.formVisibleOnPage) {
+      currentlyVisibleComponent = <NewKegForm
         onNewKegCreation={this.handleAddingNewKegToList} />
       buttonText = "Return to List of Kegs";
     }
@@ -85,16 +74,13 @@ class KegController extends React.Component {
       currentlyVisibleComponent = <KegDetails keg={this.state.selectedKeg} />;
       buttonText = "Return to List of Kegs";
     }
-  
-    else {                                // default
-      currentlyVisibleComponent = <ListView 
-        kegs={this.state.onTap}
-        pintsLeft={this.state.pintsLeft}
+    else {
+      currentlyVisibleComponent = <ListView
+        kegs={this.state.onTap}        
         handleBuyingPintsClick={this.handleBuyingPintsClick}
         onKegSelection={this.handleChangingSelectedKeg} />;
       buttonText = "Add Keg";
     }
-
     return (
       <React.Fragment>
         {currentlyVisibleComponent}

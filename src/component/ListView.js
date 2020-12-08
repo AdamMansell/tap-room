@@ -7,28 +7,28 @@ function ListView(props) {
     <React.Fragment>
       <ul>
         {
-          props.kegs.map((keg, index) => 
-          <Keg 
-            whenKegClicked = {props.onKegSelection}
-            whenBuyButtonIsClicked={props.handleBuyingPintsClick}
-            name={keg.name}
-            brand={keg.brand}
-            price={keg.price}
-            alcoholContent={keg.alcoholContent}
-            pintsLeft={keg.pintsLeft}
-            id={keg.id}
-            key={index}/>       
+          props.kegs.map((keg, index) =>
+            <Keg
+              whenKegClicked={props.onKegSelection}
+              whenBuyButtonIsClicked={props.handleBuyingPintsClick}
+              name={keg.name}
+              brand={keg.brand}
+              price={keg.price}
+              alcoholContent={keg.alcoholContent}
+              pintsLeft={keg.pintsLeft}
+              id={keg.id}
+              key={index} />
           )
-        }        
+        }
       </ul>
     </React.Fragment>
   );
 }
 
-Keg.propTypes = {
+ListView.propTypes = {
   kegs: PropTypes.arrayOf(PropTypes.object),
   onKegSelection: PropTypes.func,
-  pintsLeft: PropTypes.number.isRequired
+  handleBuyingPintsClick: PropTypes.func,  
 };
 
 export default ListView; 
